@@ -1,4 +1,4 @@
-import 'package:app_comanda/src/screens/home_screen.dart';
+import 'package:app_comanda/src/screens/home_screen/home_screen.dart';
 import 'package:app_comanda/src/utils/colors_util.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -71,13 +71,13 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
                 Visibility(
-                  visible: copAnimated,
-                  child: Image.asset(
-                    'assets/png/cheers.png',
-                    height: 190.0,
-                    width: 190.0,
-                  ),
-                ),
+                    visible: copAnimated,
+                    child: Lottie.asset(
+                      'assets/lottie/cheers.json',
+                      animate: false,
+                      width: 190,
+                      height: 190,
+                    )),
                 Center(
                   child: AnimatedOpacity(
                     opacity: animateBeerText ? 1 : 0,
