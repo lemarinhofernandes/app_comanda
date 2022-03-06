@@ -148,7 +148,7 @@ class _BottomPartState extends State<_BottomPart> {
 
   Widget _nextPageButton() {
     return InkWell(
-      radius: 30,
+      borderRadius: const BorderRadius.all(Radius.circular(40)),
       onTap: () => Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => const HomePage())),
       child: Container(
