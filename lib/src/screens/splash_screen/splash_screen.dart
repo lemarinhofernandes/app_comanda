@@ -1,3 +1,4 @@
+import 'package:app_comanda/src/components/customPageRouterWidget.dart';
 import 'package:app_comanda/src/screens/home_screen/home_screen.dart';
 import 'package:app_comanda/src/utils/colors_util.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen>
                     opacity: animateBeerText ? 1 : 0,
                     duration: const Duration(seconds: 1),
                     child: const Text(
-                      'B E E R',
+                      'Safoda',
                       style: TextStyle(
                           fontSize: 50.0, color: ColorsUtil.beerBlack),
                     ),
@@ -119,7 +120,7 @@ class _BottomPartState extends State<_BottomPart> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              'Que tal começar a sua primeira demanda?',
+              'Que tal começar a sua primeira comanda?',
               style: TextStyle(
                   fontSize: 27.0,
                   fontWeight: FontWeight.bold,
@@ -150,7 +151,7 @@ class _BottomPartState extends State<_BottomPart> {
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(40)),
       onTap: () => Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const HomePage())),
+          context, CustomPageRouter(child: const HomePage())),
       child: Container(
         height: 85.0,
         width: 85.0,
