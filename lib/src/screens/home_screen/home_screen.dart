@@ -94,14 +94,9 @@ class _HomePageState extends State<HomePage> {
             bar.nome,
             style: TextStyle(color: ColorsUtil.beerBlack),
           ),
-          subtitle: Text('Total: R\$ ${bar.total}}'),
+          subtitle: Text('Total: R\$ ${bar.total}'),
           leading: Image.asset('assets/png/toast.png'),
           trailing: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Color(0xffB0B0B0),
-              // borderRadius: BorderRadius.circular(10),
-            ),
             child: SvgPicture.network(
               'https://www.svgrepo.com/show/358329/trash.svg',
               color: Colors.red,
