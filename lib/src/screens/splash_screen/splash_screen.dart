@@ -1,5 +1,5 @@
 import 'package:app_comanda/src/components/customPageRouterWidget.dart';
-import 'package:app_comanda/src/screens/home_screen/homeScreen.dart';
+import 'package:app_comanda/src/screens/home_screen/home_screen.dart';
 import 'package:app_comanda/src/utils/colors_util.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
