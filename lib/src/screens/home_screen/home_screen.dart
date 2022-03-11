@@ -28,7 +28,10 @@ class _HomePageState extends State<HomePage> {
             body: _buildBody(),
             floatingActionButton: FloatingActionButton(
               backgroundColor: ColorsUtil.beerBlack,
-              onPressed: () {},
+              onPressed: () {
+                _homeController.addBar(ComandaModel('bar ficticio'));
+                setState(() {});
+              },
               child: const Icon(Icons.add),
             ),
           ),
@@ -73,7 +76,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _cardBar(BarModel bar) {
+  Widget _cardBar(ComandaModel bar) {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 4),
         padding: EdgeInsets.all(8),
@@ -91,16 +94,22 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(10)),
         child: ListTile(
           title: Text(
-            bar.nome,
+            bar.nomeBar ?? 'Barzin',
             style: TextStyle(color: ColorsUtil.beerBlack),
           ),
           subtitle: Text('Total: R\$ ${bar.total}'),
           leading: Image.asset('assets/png/toast.png'),
-          trailing: Container(
-            child: SvgPicture.network(
-              'https://www.svgrepo.com/show/358329/trash.svg',
-              color: Colors.red,
-              placeholderBuilder: (_) => CircularProgressIndicator(),
+          trailing: InkWell(
+            onTap: () {
+              _homeController.removeBar(bar);
+              setState(() {});
+            },
+            child: Container(
+              child: SvgPicture.network(
+                'https://www.svgrepo.com/show/358329/trash.svg',
+                color: Colors.red,
+                placeholderBuilder: (_) => CircularProgressIndicator(),
+              ),
             ),
           ),
         ));
