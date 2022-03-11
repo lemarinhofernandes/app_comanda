@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: ColorsUtil.beerBlack,
+      backgroundColor: ColorsUtil.appGrey,
       body: Stack(
         children: [
           // White Container top half
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
             duration: const Duration(seconds: 1),
             height: copAnimated ? screenHeight / 1.9 : screenHeight,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorsUtil.beerBlack,
               borderRadius: BorderRadius.circular(copAnimated ? 40.0 : 0.0),
             ),
             child: Column(
@@ -84,9 +84,9 @@ class _SplashScreenState extends State<SplashScreen>
                     opacity: animateBeerText ? 1 : 0,
                     duration: const Duration(seconds: 1),
                     child: const Text(
-                      'Safoda',
-                      style: TextStyle(
-                          fontSize: 50.0, color: ColorsUtil.beerBlack),
+                      '',
+                      style:
+                          TextStyle(fontSize: 50.0, color: ColorsUtil.appGrey),
                     ),
                   ),
                 ),
@@ -124,14 +124,14 @@ class _BottomPartState extends State<_BottomPart> {
               style: TextStyle(
                   fontSize: 27.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: ColorsUtil.beerBlack),
             ),
             const SizedBox(height: 30.0),
             Text(
               'Basta clicar no botão e avançar para a próxima pagina.',
               style: TextStyle(
                 fontSize: 15.0,
-                color: Colors.white.withOpacity(0.8),
+                color: ColorsUtil.beerBlack.withOpacity(0.8),
                 height: 1.5,
               ),
             ),
@@ -157,12 +157,12 @@ class _BottomPartState extends State<_BottomPart> {
         width: 85.0,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.white, width: 2.0),
+          border: Border.all(color: ColorsUtil.beerBlack, width: 2.0),
         ),
         child: const Icon(
           Icons.chevron_right,
           size: 50.0,
-          color: Colors.white,
+          color: ColorsUtil.beerBlack,
         ),
       ),
     );
