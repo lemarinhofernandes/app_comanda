@@ -1,4 +1,4 @@
-import 'package:app_comanda/src/models/bar_model.dart';
+import 'package:app_comanda/src/models/comanda_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenController {

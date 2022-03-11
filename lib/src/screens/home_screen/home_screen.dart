@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:app_comanda/src/models/bar_model.dart';
+import 'package:app_comanda/src/models/comanda_model.dart';
 import 'package:app_comanda/src/screens/home_screen/home_screen_controller.dart';
 import 'package:app_comanda/src/utils/colors_util.dart';
 import 'package:flutter/material.dart';
