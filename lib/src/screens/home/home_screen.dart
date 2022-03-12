@@ -1,9 +1,14 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:app_comanda/src/components/customPageRouterWidget.dart';
 import 'package:app_comanda/src/models/comanda_model.dart';
-import 'package:app_comanda/src/screens/home/home_screen_controller.dart';
+import 'package:app_comanda/src/screens/cadastro_comanda/cadastro_comanda.dart';
+import 'package:app_comanda/src/screens/comanda/comanda_screen.dart';
 import 'package:app_comanda/src/utils/colors_util.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'controller/home_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,7 +18,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final HomeScreenController _homeController = HomeScreenController();
+  final HomeController _homeController = HomeController();
+
+  @override
+  void initState() {
+    _homeController;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +37,19 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: ColorsUtil.appGrey,
             appBar: _buildAppBar(),
             body: _buildBody(),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: ColorsUtil.beerBlack,
-              onPressed: () {
-                _homeController.addBar(ComandaModel('bar ficticio'));
-                setState(() {});
-              },
-              child: const Icon(Icons.add),
-            ),
+            floatingActionButton: Observer(builder: (_) {
+              return FloatingActionButton(
+                backgroundColor: ColorsUtil.beerBlack,
+                onPressed: () {
+                  Navigator.of(context).push(CustomPageRouter(
+                      child: CadastroComanda(
+                        homeController: _homeController,
+                      ),
+                      direction: AxisDirection.up));
+                },
+                child: const Icon(Icons.add),
+              );
+            }),
           ),
         ));
   }
@@ -62,57 +78,69 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
               shrinkWrap: true,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: _homeController.listaMock
-                      .map((bar) => _cardBar(bar))
-                      .toList(),
-                )
+                Observer(
+                    name: 'suspeito',
+                    builder: (_) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: _homeController.listaMock
+                            .map((bar) => _cardBar(bar))
+                            .toList(),
+                      );
+                    })
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _cardBar(ComandaModel bar) {
-    return Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            // ignore: prefer_const_literals_to_create_immutables
-            boxShadow: [
-              const BoxShadow(
-                  blurRadius: 4,
-                  color: ColorsUtil.beerBlack,
-                  spreadRadius: 0.5,
-                  offset: Offset(0, 4))
-            ],
-            color: ColorsUtil.appWhite,
-            border: Border.all(color: ColorsUtil.beerBlack, width: 2),
-            borderRadius: BorderRadius.circular(10)),
-        child: ListTile(
-          title: Text(
-            bar.nomeBar ?? 'Barzin',
-            style: TextStyle(color: ColorsUtil.beerBlack),
-          ),
-          subtitle: Text('Total: R\$ ${bar.total}'),
-          leading: Image.asset('assets/png/toast.png'),
-          trailing: InkWell(
-            onTap: () {
-              _homeController.removeBar(bar);
-              setState(() {});
-            },
-            child: Container(
-              child: SvgPicture.network(
-                'https://www.svgrepo.com/show/358329/trash.svg',
-                color: Colors.red,
-                placeholderBuilder: (_) => CircularProgressIndicator(),
-              ),
+  Widget _cardBar(ComandaModel comanda) {
+    return InkWell(
+      onTap: () =>
+          Navigator.of(context).push(CustomPageRouter(child: ComandaScreen())),
+      child: Container(
+          margin: EdgeInsets.symmetric(vertical: 4),
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              // ignore: prefer_const_literals_to_create_immutables
+              boxShadow: [
+                const BoxShadow(
+                    blurRadius: 4,
+                    color: ColorsUtil.beerBlack,
+                    spreadRadius: 0.5,
+                    offset: Offset(0, 4))
+              ],
+              color: ColorsUtil.appWhite,
+              border: Border.all(color: ColorsUtil.beerBlack, width: 2),
+              borderRadius: BorderRadius.circular(10)),
+          child: ListTile(
+            title: Text(
+              comanda.nomeBar ?? 'Barzin',
+              style: TextStyle(color: ColorsUtil.beerBlack),
             ),
-          ),
-        ));
+            subtitle: Text('Total: R\$ ${comanda.total}'),
+            leading: Image.asset('assets/png/toast.png'),
+            trailing: Observer(builder: (_) {
+              return InkWell(
+                onTap: () {
+                  _homeController.removeComanda(comanda);
+                  setState(() {});
+                },
+                child: Container(
+                  child: SvgPicture.network(
+                    'https://www.svgrepo.com/show/151015/trash-black-shape.svg',
+                    height: 24,
+                    width: 24,
+                    color: ColorsUtil.beerBlack,
+                    placeholderBuilder: (_) => CircularProgressIndicator(),
+                  ),
+                ),
+              );
+            }),
+          )),
+    );
   }
 
   Widget _buildHeader() {
