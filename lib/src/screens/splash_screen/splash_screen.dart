@@ -1,4 +1,4 @@
-import 'package:app_comanda/src/components/customPageRouterWidget.dart';
+import 'package:app_comanda/src/components/customPageRoute_widget.dart';
 import 'package:app_comanda/src/screens/home/home_screen.dart';
 import 'package:app_comanda/src/utils/colors_util.dart';
 import 'package:flutter/material.dart';
