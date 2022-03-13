@@ -16,41 +16,75 @@ class CadastroComanda extends StatefulWidget {
 class _CadastroComandaState extends State<CadastroComanda> {
   CadastroController _controller = CadastroController();
   TextEditingController nomeController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    nomeController;
+    passwordController;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nomeController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorsUtil.beerBlack,
-        title: Text('Nova comanda'),
+        title: const Text('Nova comanda'),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Center(
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Text(
-                'NOME',
+                'Nome',
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w700,
                     color: ColorsUtil.beerBlack),
               ),
-              _textFieldWidget(nomeController),
+              _textFieldWidget(nomeController, false),
+              const Text(
+                'Senha',
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: ColorsUtil.beerBlack),
+              ),
+              _textFieldWidget(passwordController, true),
               FloatingActionButton.extended(
                 onPressed: () {
                   widget.homeController
                       ?.addComanda(ComandaModel(nomeController.text));
                   Navigator.of(context).pop();
                 },
-                label: Text(
-                  '                            Salvar                            ',
-                  style: TextStyle(color: ColorsUtil.appWhite),
+                label: Row(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const Icon(Icons.save),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    const Text(
+                      'Salvar',
+                      style: TextStyle(color: ColorsUtil.appWhite),
+                    ),
+                  ],
                 ),
                 backgroundColor: ColorsUtil.beerBlack,
               )
@@ -61,11 +95,12 @@ class _CadastroComandaState extends State<CadastroComanda> {
     );
   }
 
-  Container _textFieldWidget(TextEditingController controller) {
+  Container _textFieldWidget(TextEditingController controller, bool senha) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      margin: const EdgeInsets.symmetric(vertical: 12),
+      margin: const EdgeInsets.symmetric(vertical: 24),
       child: TextField(
+        obscureText: senha,
         textCapitalization: TextCapitalization.sentences,
         controller: controller,
         style: const TextStyle(fontSize: 18, letterSpacing: 1.2),

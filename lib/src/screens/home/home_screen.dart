@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:app_comanda/src/components/customPageRouterWidget.dart';
+import 'package:app_comanda/src/components/customPageRoute_widget.dart';
 import 'package:app_comanda/src/models/comanda_model.dart';
 import 'package:app_comanda/src/screens/cadastro_comanda/cadastro_comanda.dart';
 import 'package:app_comanda/src/screens/comanda/comanda_screen.dart';

@@ -10,6 +10,6 @@ class ComandaScreen extends StatefulWidget {
 class _ComandaScreenState extends State<ComandaScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(appBar: AppBar(), body: Container());
   }
 }
